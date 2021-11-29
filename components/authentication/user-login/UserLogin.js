@@ -7,17 +7,19 @@ import {useAuth} from 'libs/hooks/useAuth'
 import TextInput from "ui/forms/TextInput"
  import { Button } from "ui/buttons"
 import Login from "./styled"
-import router from 'next/router'
 
 
  
  
 function UserLogin ({...props}){
+    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
     const user = useAuth()
+    
     console.log(user)
+   
 
     async function handleSubmit(e) {
         e.preventDefault()
