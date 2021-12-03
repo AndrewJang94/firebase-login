@@ -1,12 +1,35 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router';
+import { auth } from 'libs/firebase';
+import { useState } from 'react';
+import { GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
+import { useAuth } from 'libs/hooks/useAuth';
 import { ProviderButton } from "ui/buttons";
 import google from "./google.png";
 
 function GoogleProvider({ children,  ...props }) {
+
+  const [isValidUser, setIsValidUser] = useState(null);
+  const user = useAuth();
+  const router = useRouter();
+  const provider = new GoogleAuthProvider();
+
+  async function signIn(){
+    setIsValidUser( await signInWithPopup(auth, provider))
+  }
+
+    function handleClick(){
+      console.log(provider);
+        signIn()
+    }
+
+    if(isValidUser) {
+      router.push('/todo')
+    }
  
 
   return (
-    <ProviderButton >
+    <ProviderButton onClick={handleClick} {...props}>
       <div>
         <Image
           src={google}
