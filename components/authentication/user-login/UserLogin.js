@@ -26,7 +26,7 @@ function UserLogin ({...props}){
         
         const isValidUser = await signInWithEmailAndPassword(auth, email, password)
         if(isValidUser){
-            router.push('/todo')
+            router.push('/add-item')
         }
     }
    
